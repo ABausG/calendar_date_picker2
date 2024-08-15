@@ -126,8 +126,10 @@ class CalendarDatePicker2Config {
     this.todayTextStyle,
     this.yearTextStyle,
     this.selectedYearTextStyle,
+    this.disabledYearTextStyle,
     this.monthTextStyle,
     this.selectedMonthTextStyle,
+    this.disabledMonthTextStyle,
     this.dayBorderRadius,
     this.yearBorderRadius,
     this.monthBorderRadius,
@@ -248,17 +250,23 @@ class CalendarDatePicker2Config {
   /// Custom text style for today
   final TextStyle? todayTextStyle;
 
-  // Custom text style for years list
+  /// Custom text style for years list
   final TextStyle? yearTextStyle;
 
-  // Custom text style for selected year(s)
+  /// Custom text style for selected year(s)
   final TextStyle? selectedYearTextStyle;
 
-  // Custom text style for month list
+  /// Custom text style for disabled year(s)
+  final TextStyle? disabledYearTextStyle;
+
+  /// Custom text style for month list
   final TextStyle? monthTextStyle;
 
-  // Custom text style for selected month(s)
+  /// Custom text style for selected month(s)
   final TextStyle? selectedMonthTextStyle;
+
+  /// Custom text style for disabled month(s)
+  final TextStyle? disabledMonthTextStyle;
 
   /// Custom border radius for day indicator
   final BorderRadius? dayBorderRadius;
@@ -402,9 +410,11 @@ class CalendarDatePicker2Config {
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
+    TextStyle? disabledYearTextStyle,
     TextStyle? selectedRangeDayTextStyle,
     TextStyle? monthTextStyle,
     TextStyle? selectedMonthTextStyle,
+    TextStyle? disabledMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
     BorderRadius? monthBorderRadius,
@@ -471,11 +481,15 @@ class CalendarDatePicker2Config {
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
       selectedYearTextStyle:
           selectedYearTextStyle ?? this.selectedYearTextStyle,
+      disabledYearTextStyle:
+          disabledYearTextStyle ?? this.disabledYearTextStyle,
       selectedRangeDayTextStyle:
           selectedRangeDayTextStyle ?? this.selectedRangeDayTextStyle,
       monthTextStyle: monthTextStyle ?? this.monthTextStyle,
       selectedMonthTextStyle:
           selectedMonthTextStyle ?? this.selectedMonthTextStyle,
+      disabledMonthTextStyle:
+          disabledMonthTextStyle ?? this.disabledMonthTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
       monthBorderRadius: monthBorderRadius ?? this.monthBorderRadius,
@@ -561,9 +575,11 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
+    TextStyle? disabledYearTextStyle,
     TextStyle? selectedRangeDayTextStyle,
     TextStyle? monthTextStyle,
     TextStyle? selectedMonthTextStyle,
+    TextStyle? disabledMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
     BorderRadius? monthBorderRadius,
@@ -634,8 +650,10 @@ class CalendarDatePicker2WithActionButtonsConfig
           todayTextStyle: todayTextStyle,
           yearTextStyle: yearTextStyle,
           selectedYearTextStyle: selectedYearTextStyle,
+          disabledYearTextStyle: disabledYearTextStyle,
           monthTextStyle: monthTextStyle,
           selectedMonthTextStyle: selectedMonthTextStyle,
+          disabledMonthTextStyle: disabledMonthTextStyle,
           dayBorderRadius: dayBorderRadius,
           yearBorderRadius: yearBorderRadius,
           monthBorderRadius: monthBorderRadius,
@@ -727,8 +745,10 @@ class CalendarDatePicker2WithActionButtonsConfig
     TextStyle? todayTextStyle,
     TextStyle? yearTextStyle,
     TextStyle? selectedYearTextStyle,
+    TextStyle? disabledYearTextStyle,
     TextStyle? monthTextStyle,
     TextStyle? selectedMonthTextStyle,
+    TextStyle? disabledMonthTextStyle,
     BorderRadius? dayBorderRadius,
     BorderRadius? yearBorderRadius,
     BorderRadius? monthBorderRadius,
@@ -806,9 +826,13 @@ class CalendarDatePicker2WithActionButtonsConfig
       yearTextStyle: yearTextStyle ?? this.yearTextStyle,
       selectedYearTextStyle:
           selectedYearTextStyle ?? this.selectedYearTextStyle,
+      disabledYearTextStyle:
+          disabledYearTextStyle ?? this.disabledYearTextStyle,
       monthTextStyle: monthTextStyle ?? this.monthTextStyle,
       selectedMonthTextStyle:
           selectedMonthTextStyle ?? this.selectedMonthTextStyle,
+      disabledMonthTextStyle:
+          disabledMonthTextStyle ?? this.disabledMonthTextStyle,
       dayBorderRadius: dayBorderRadius ?? this.dayBorderRadius,
       yearBorderRadius: yearBorderRadius ?? this.yearBorderRadius,
       monthBorderRadius: monthBorderRadius ?? this.monthBorderRadius,
