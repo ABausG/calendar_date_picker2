@@ -167,6 +167,7 @@ class CalendarDatePicker2Config {
     this.scrollViewOnScrolling,
     this.scrollViewController,
     this.dynamicCalendarRows,
+    this.focusOnLastDayOfRange = false,
   })  : calendarType = calendarType ?? CalendarDatePicker2Type.single,
         firstDate = DateUtils.dateOnly(firstDate ?? DateTime(1970)),
         lastDate =
@@ -391,6 +392,10 @@ class CalendarDatePicker2Config {
   /// If it is [CalendarDatePicker2Mode.year] users can only select years. Returning always the First Day of that year
   final CalendarDatePicker2Mode finestMode;
 
+  /// If true focus on the last day of a given range
+  /// Defaults to false meaning the start day of the range is selected
+  final bool focusOnLastDayOfRange;
+
   /// Copy the current [CalendarDatePicker2Config] with some new values
   CalendarDatePicker2Config copyWith({
     CalendarDatePicker2Type? calendarType,
@@ -457,6 +462,7 @@ class CalendarDatePicker2Config {
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
     CalendarDatePicker2Mode? finestMode,
+    bool? focusOnLastDayOfRange,
   }) {
     return CalendarDatePicker2Config(
       calendarType: calendarType ?? this.calendarType,
@@ -550,6 +556,8 @@ class CalendarDatePicker2Config {
       scrollViewController: scrollViewController ?? this.scrollViewController,
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
       finestMode: finestMode ?? this.finestMode,
+      focusOnLastDayOfRange:
+          focusOnLastDayOfRange ?? this.focusOnLastDayOfRange,
     );
   }
 }
@@ -622,6 +630,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
     CalendarDatePicker2Mode finestMode = CalendarDatePicker2Mode.day,
+    bool focusOnLastDayOfRange = false,
     this.gapBetweenCalendarAndButtons,
     this.cancelButtonTextStyle,
     this.cancelButton,
@@ -696,6 +705,7 @@ class CalendarDatePicker2WithActionButtonsConfig
           scrollViewController: scrollViewController,
           dynamicCalendarRows: dynamicCalendarRows,
           finestMode: finestMode,
+          focusOnLastDayOfRange: focusOnLastDayOfRange,
         );
 
   /// The gap between calendar and action buttons
@@ -800,6 +810,7 @@ class CalendarDatePicker2WithActionButtonsConfig
     ScrollController? scrollViewController,
     bool? dynamicCalendarRows,
     CalendarDatePicker2Mode? finestMode,
+    bool? focusOnLastDayOfRange,
   }) {
     return CalendarDatePicker2WithActionButtonsConfig(
       calendarType: calendarType ?? this.calendarType,
@@ -906,6 +917,8 @@ class CalendarDatePicker2WithActionButtonsConfig
       scrollViewController: scrollViewController ?? this.scrollViewController,
       dynamicCalendarRows: dynamicCalendarRows ?? this.dynamicCalendarRows,
       finestMode: finestMode ?? this.finestMode,
+      focusOnLastDayOfRange:
+          focusOnLastDayOfRange ?? this.focusOnLastDayOfRange,
     );
   }
 }

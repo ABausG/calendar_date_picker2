@@ -105,7 +105,9 @@ class _CalendarDatePicker2State extends State<CalendarDatePicker2> {
     final config = widget.config;
     final initialDate = widget.displayedMonthDate ??
         (widget.value.isNotEmpty && widget.value[0] != null
-            ? DateTime(widget.value[0]!.year, widget.value[0]!.month)
+            ? config.focusOnLastDayOfRange
+                ? DateTime(widget.value.last!.year, widget.value.last!.month)
+                : DateTime(widget.value.first!.year, widget.value.first!.month)
             : DateUtils.dateOnly(DateTime.now()));
     _mode = config.calendarViewMode;
     _currentDisplayedMonthDate = DateTime(initialDate.year, initialDate.month);
