@@ -159,8 +159,6 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    const Key monthsAfterInitialMonthKey = Key('monthsAfterInitialMonth');
-
     return Column(
       children: <Widget>[
         if (widget.config.hideScrollViewTopHeader != true)
@@ -179,32 +177,64 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
             firstDate: widget.config.firstDate,
             lastDate: widget.config.lastDate,
             initialFocusedDay: widget.config.currentDate,
-            // In order to prevent performance issues when displaying the
-            // correct initial month, 2 `SliverList`s are used to split the
-            // months. The first item in the second SliverList is the initial
-            // month to be displayed.
-            child: CustomScrollView(
-              key: _scrollViewKey,
-              controller: _controller,
-              center: monthsAfterInitialMonthKey,
-              slivers: <Widget>[
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) =>
-                        _buildMonthItem(context, index, true),
-                    childCount: _initialMonthIndex,
+            child: Builder(builder: (context) {
+              // If the initial month is the last month in the list we don't need to split the list. to show the correct month.
+              // If we would do that we end up with whitespace below the list
+              // Thus if the initial month is the last month in the list, the list is reversed and doesn't use the center functionality
+              final initialMonthIsLastMonth =
+                  _numberOfMonths == _initialMonthIndex + 1;
+              if (initialMonthIsLastMonth) {
+                return CustomScrollView(
+                  key: _scrollViewKey,
+                  controller: _controller,
+                  reverse: true,
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) =>
+                            _buildMonthItem(context, index, false),
+                        childCount: _numberOfMonths - _initialMonthIndex,
+                      ),
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) =>
+                            _buildMonthItem(context, index, true),
+                        childCount: _initialMonthIndex,
+                      ),
+                    ),
+                  ],
+                );
+              }
+              // In order to prevent performance issues when displaying the
+              // correct initial month, 2 `SliverList`s are used to split the
+              // months. The first item in the second SliverList is the initial
+              // month to be displayed.
+              const Key monthsAfterInitialMonthKey =
+                  Key('monthsAfterInitialMonth');
+              return CustomScrollView(
+                key: _scrollViewKey,
+                controller: _controller,
+                center: monthsAfterInitialMonthKey,
+                slivers: <Widget>[
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) =>
+                          _buildMonthItem(context, index, true),
+                      childCount: _initialMonthIndex,
+                    ),
                   ),
-                ),
-                SliverList(
-                  key: monthsAfterInitialMonthKey,
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) =>
-                        _buildMonthItem(context, index, false),
-                    childCount: _numberOfMonths - _initialMonthIndex,
+                  SliverList(
+                    key: monthsAfterInitialMonthKey,
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) =>
+                          _buildMonthItem(context, index, false),
+                      childCount: _numberOfMonths - _initialMonthIndex,
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              );
+            }),
           ),
         ),
       ],
