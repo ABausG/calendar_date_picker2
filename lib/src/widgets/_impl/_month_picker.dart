@@ -61,11 +61,11 @@ class _MonthPickerState extends State<_MonthPicker> {
           widget.selectedDates.isNotEmpty && widget.selectedDates[0] != null
               ? _scrollOffsetForMonth(widget.selectedDates[0]!)
               : _scrollOffsetForMonth(DateUtils.dateOnly(DateTime.now()));
+      // Check if Position is attached
+      // Otherwise Scroll Controller will jump into a NullPointer Exception
+      // This is because it checks for `_maxScrollExtent!` to account for potential overscroll
       if (_scrollController.position.hasContentDimensions) {
-        _scrollController.jumpTo(scrollOffset.clamp(
-          _scrollController.position.minScrollExtent,
-          _scrollController.position.maxScrollExtent,
-        ));
+        _scrollController.jumpTo(scrollOffset);
       }
     }
   }
@@ -130,11 +130,11 @@ class _MonthPickerState extends State<_MonthPicker> {
 
     TextStyle? itemStyle = widget.config.monthTextStyle ??
         textTheme.bodyLarge?.apply(color: textColor);
-    if (isSelected) {
-      itemStyle = widget.config.selectedMonthTextStyle ?? itemStyle;
-    }
     if (!isMonthSelectable) {
       itemStyle = widget.config.disabledMonthTextStyle ?? itemStyle;
+    }
+    if (isSelected) {
+      itemStyle = widget.config.selectedMonthTextStyle ?? itemStyle;
     }
 
     BoxDecoration? decoration;
