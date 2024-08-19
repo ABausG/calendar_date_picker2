@@ -151,6 +151,8 @@ class _CalendarScrollViewState extends State<_CalendarScrollView> {
             displayedMonth: month,
             onChanged: widget.onChanged,
             dayRowsCount: dayRowsCount,
+            // Do not show Day Name Headers as they are already sticky
+            showDayHeader: false,
           ),
         ),
       ],

@@ -12,6 +12,7 @@ class _DayPicker extends StatefulWidget {
     required this.selectedDates,
     required this.onChanged,
     required this.dayRowsCount,
+    this.showDayHeader = true,
     Key? key,
   }) : super(key: key);
 
@@ -31,6 +32,9 @@ class _DayPicker extends StatefulWidget {
 
   /// The number of rows to display in the day picker.
   final int dayRowsCount;
+
+  /// Whether to show the day headers.
+  final bool showDayHeader;
 
   @override
   _DayPickerState createState() => _DayPickerState();
@@ -92,6 +96,9 @@ class _DayPickerState extends State<_DayPicker> {
   List<Widget> _dayHeaders(
       TextStyle? headerStyle, MaterialLocalizations localizations) {
     final List<Widget> result = <Widget>[];
+    if (!widget.showDayHeader) {
+      return result;
+    }
     final weekdays =
         widget.config.weekdayLabels ?? localizations.narrowWeekdays;
     final firstDayOfWeek =
